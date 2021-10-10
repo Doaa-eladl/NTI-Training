@@ -1,0 +1,16 @@
+{
+  "name": "day4task",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "validator": "^13.6.0",
+    "yargs": "^17.2.1"
+  }
+}

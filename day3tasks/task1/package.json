@@ -1,0 +1,17 @@
+{
+  "name": "students",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "uniqid": "^5.4.0",
+    "validator": "^13.6.0",
+    "yargs": "^17.2.1"
+  }
+}
