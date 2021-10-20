@@ -1,0 +1,15 @@
+{{>header}}
+{{>navbar}}
+<section class="container my-5">
+    {{#unless Status}}
+        <div class="alert alert-danger">Task not found</div>
+    {{else}}
+        <div class="border border-danger border-2 p-3">
+            <h3>user Id:    {{data._id}}</h3>
+            <h3>user Name:   {{data.taskName}}</h3>
+            <h3>user Category:    {{data.TaskCategory}}</h3>
+            <h3>user Details:   {{data.Details}}</h3>
+        </div>
+    {{/unless}}
+</section>
+{{>footer}}

@@ -1,0 +1,16 @@
+{{>header}}
+{{>navbar}}
+<section class="my-3 container">
+    <form method="post">
+        <div class="mb-3">
+            <input class="form-control" placeholder="id" value="{{data._id}}" disabled name="_id">
+        </div>
+        <div class="mb-3">
+            <input class="form-control" placeholder="Task Category" value="{{data.TaskCategory}}" name="TaskCategory">
+        </div>
+        <div class="mb-3">
+            <input type="submit" class="btn btn-primary" value="edit">
+        </div>
+    </form>
+</section>
+{{>footer}}

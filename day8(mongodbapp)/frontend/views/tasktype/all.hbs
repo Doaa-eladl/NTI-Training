@@ -1,0 +1,33 @@
+{{>header}}
+{{>navbar}}
+
+<section class="container my-4">
+    <h2 class="text-primary mb-3">All Users</h2>
+    <table class="table table-bordered">
+        <thead>
+            <th class="text-center">id</th>
+            <th class="text-center">Task Category</th>
+            <th class="text-center">Actions</th>
+        </thead>
+        <tbody>
+            {{#unless data}}
+                <tr>
+                    <td colspan="4" class="text-center">No Tasks yet</td>
+                </tr>
+            {{else}}
+                {{#each data}}
+                    <tr>
+                        <td class="text-center">{{this._id}}</td>
+                        <td class="text-center">{{this.TaskCategory}}</td>
+                        <td class="text-center">                    
+                            <a href="/edit/{{this._id}}" class="mr-2 btn btn-warning">Edit Task Type</a>
+                            <a href="/delete/{{this._id}}" class="mr-2 btn btn-danger">delete Task Type</a>
+                        </td>
+                    </tr>
+                {{/each}}
+            {{/unless}}
+        </tbody>
+    </table>
+</section>
+
+{{>footer}}
