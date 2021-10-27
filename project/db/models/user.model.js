@@ -47,6 +47,7 @@ const UserSchema= mongoose.Schema({
         type:Object,
         required:true
     },
+    orders:[],
     tokens:[ { token: { type:String , required:true } } ]
     },
     { timestamps : true}

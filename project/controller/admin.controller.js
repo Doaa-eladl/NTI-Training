@@ -1,6 +1,7 @@
 const User=require('../db/models/user.model')
 const Product=require('../db/models/products.model')
 const CryptoJS = require("crypto-js");
+const Cart=require('../db/models/cart.model')
 const { ObjectId } = require('mongodb');
 
 class AdminController{
@@ -96,15 +97,63 @@ class AdminController{
             res.status(500).send(e.message)
         }
     }
-    /*GET PRODUCT
-    static getproduct = async (req,res) =>{
-    }*/
-    //GET ALL PRODUCTS
-    static getallproducts = async (req,res) =>{
+    //GET PRODUCT
+    static showsingle = async (req,res) =>{
         try{
-            const products = await Product.find()
-            if(!products) throw new Error('no products found')
-            res.status(200).send(products)
+            const product = await Product.findById(req.body.id)
+            res.status(200).send(product)
+        }
+        catch(e){
+            res.status(500).send(e.message)
+        }
+    }
+    //DELETE USER CART BY ADMIN
+    static deleteusercart = async (req,res) => {
+        try{
+            const usercart = await Cart.find( { userId:req.body.userId } )
+            //check not found for array
+            if(usercart.length==0) throw new Error('this user has no cart yet')
+            await Cart.deleteOne( { usercart } )
+            res.status(200).send('user cart has been deleted')
+        }
+        catch(e){
+            res.status(500).send(e.message)
+        }
+    }
+    //show all carts
+    static showcarts = async (req,res) => {
+        try{
+            const carts = await Cart.find()
+            if(carts.length==0) throw new Error('there is no carts')
+            res.status(200).send(carts)
+        }
+        catch(e){
+            res.status(500).send(e.message)
+        }
+    }
+    //show single cart
+    static showsinglecart = async (req,res) => {
+        try{
+            const cart = await Cart.findOne( { userId:req.body.userId } )
+            if(!cart) throw new Error('cart not found')
+            res.status(200).send(cart)
+        }
+        catch(e){
+            res.status(200).send(e.message)
+        }
+    }
+    //show all users orders
+    static showorders = async (req,res) => {
+        try{
+            const users = await User.find()
+            if(users.length==0) throw new Error('no users found')
+            let data =[]
+            for(let i=0;i<users.length ;i++){
+                data.push( { useerid:users[i]._id , username:users[i].username ,orders:users[i].orders } )
+                console.log(data)
+            }
+            if(data.length==0) throw new Error('no orders found')
+            res.status(200).send(data)
         }
         catch(e){
             res.status(500).send(e.message)

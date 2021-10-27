@@ -26,11 +26,31 @@ const ProductsSchema=mongoose.Schema({
         type:Number,
         required:true
     },
+    categorytype:{
+        type:String,
+        trim:true,
+        required:true,
+        enum:[ "smartphones" ,"notebooks" ]
+    },
+    size:{
+        type:String,
+        trim:true,
+        required:true
+    },
     img:{},
     tokens:[ { token: { type:String , required:true } } ]
     },
     { timestamps : true}
 )
+
+ProductsSchema.methods.toJSON = function(){
+    const data = this.toObject()
+    delete data.stock
+    delete data.profit
+    delete data.__v
+    delete data.tokens
+    return data
+}
 
 ProductsSchema.methods.generateToken = async function(){
     const product=this
