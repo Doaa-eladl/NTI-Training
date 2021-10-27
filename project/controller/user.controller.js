@@ -138,9 +138,12 @@ class UserController{
             if(!product) throw new Error('product not found')
             const usercart = await Cart.findOne( { userId:req.user.id } )
             if(!usercart){
-                const cart = new Cart( { userId:req.user.id , quantity:req.body.quantity } )
+                const cart = new Cart( { userId:req.user.id} )
                 //بيدخل واحده بس 
                 cart.productsId.push(req.body)
+                for(let i=0 ; i<req.body.quantity ; i++){
+                    cart.totalprice += product.price
+                }
                 await cart.save()
                 res.status(200).send(cart)
             }
@@ -152,9 +155,15 @@ class UserController{
                 }
                 if(flag!=-1){
                     usercart.productsId[flag].quantity+=req.body.quantity
+                    for(let i=0;i<req.body.quantity;i++){
+                        usercart.totalprice+=product.price
+                    }
                 }
                 else{
                     usercart.productsId.push(req.body)
+                    for(let i=0;i<req.body.quantity;i++){
+                        usercart.totalprice+=product.price
+                    }
                 }
                 await usercart.save()
                 res.status(200).send(usercart)
@@ -295,37 +304,18 @@ class UserController{
     //Confirmation the order
     static sendorder = async (req,res) => {
         try{
-            const product = await Product.findById( { _id:req.body.productId } )
-            if(!product) throw new Error('product not found')
-            let flag=-1
-            for(let i=0;i<req.user.orders.length;i++){
-                // ف حاجات js بتغيرها ف لازم ارجع احولها ل string
-                if( req.user.orders[i].id == product._id.toString()){
-                // if( req.user.orders[i].id == req.body.productId ){
-                    flag=i
-                }
-            }
-            console.log(flag)
-            if(flag!=-1){
-                console.log('old')
-                req.user.orders[flag].quantity++
-                req.user.orders[flag].price += product.price
-                await req.user.save()
-            }
-            else{
-                console.log('new')
-                const productdata ={ id:product._id , title:product.title , price:product.price , quantity:1 }
-                const order = {...productdata}
-                req.user.orders.push(order)
-            }
+            const cart = await Cart.findOne({userId:req.user.id})
+            if(!cart) throw new Error('this user has no cart yet')
+            const user = await User.findById({_id:req.user.id})
+            const { userId , totalprice , productsId} = cart
+            req.user.orders.push(totalprice,...productsId)
             await req.user.save()
-            res.status(200).send(req.user)
+            await Cart.findOneAndDelete({userId:req.user.id})
+            res.status(200).send(req.user.orders)
         }
         catch(e){
             res.status(500).send(e.message)
         }
-
-        //delete product from cart
     }
 }
 

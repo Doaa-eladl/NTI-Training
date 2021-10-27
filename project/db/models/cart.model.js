@@ -12,6 +12,7 @@ const CartSchema=mongoose.Schema({
             quantity:{ type:Number , default:1 }
         }
     ],
+    totalprice:{type:Number,default:0}
     // المفروض تكون عدد مرات الضغط عالزرار
 })
 
