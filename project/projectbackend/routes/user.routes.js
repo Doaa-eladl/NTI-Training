@@ -4,19 +4,13 @@ const { verifytokenandauthorization }=require('../middleware/auth.middleware')
 
 //UPDATE
 router.put('/update', verifytokenandauthorization ,UserController.update)
+//change password
+router.put('/changepass', verifytokenandauthorization ,UserController.changepass)
+
 //DELETE
 router.delete('/delete', verifytokenandauthorization ,UserController.delete)
 //SHOW USER (PROFILE)
 router.get('/profile', verifytokenandauthorization ,UserController.profile)
-/*SHOW ALL PRODUCTS
-Admin or User can see products */
-router.get('/showallproducts', verifytokenandauthorization ,UserController.getallproducts)
-
-//show notebooks category
-router.get('/shownotebookproducts', verifytokenandauthorization ,UserController.shownotebookproducts)
-
-//show smartphones category
-router.get('/showsmartphoneproducts', verifytokenandauthorization ,UserController.showsmartphoneproducts)
 
 //ADD TO CART
 router.post("/addtocart" , verifytokenandauthorization ,UserController.addtocart)
@@ -33,11 +27,13 @@ router.post("/decreasequantity", verifytokenandauthorization ,UserController.dec
 router.post("/deleteproductfromcart", verifytokenandauthorization ,UserController.deleteproductfromcart)
 
 //showorder
-router.post('/showorder', verifytokenandauthorization ,UserController.showorder)
+router.get('/showorder', verifytokenandauthorization ,UserController.showorder)
 //Confirmation the order
-router.post('/confirmation', verifytokenandauthorization ,UserController.confirmation)
+//router.post('/confirmation', verifytokenandauthorization ,UserController.confirmation)
 
 //send order
-router.post('/sendorder', verifytokenandauthorization ,UserController.sendorder)
+router.get('/sendorder', verifytokenandauthorization ,UserController.sendorder)
+//show user orders
+router.get('/showuserorder', verifytokenandauthorization ,UserController.showuserorder)
 
 module.exports=router

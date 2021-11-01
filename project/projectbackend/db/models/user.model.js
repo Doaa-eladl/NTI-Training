@@ -39,15 +39,11 @@ const UserSchema= mongoose.Schema({
         type:Boolean,
         default: false
     },
-    status:{
-        type:Boolean,
-        default: false
-    },
     address:{
         type:Object,
         required:true
     },
-    orders:[],
+    orders:[{}],
     tokens:[ { token: { type:String , required:true } } ]
     },
     { timestamps : true}

@@ -1,7 +1,7 @@
 const router=require('express').Router()
 const AdminController=require('../controller/admin.controller')
-const { verifytokenandauthorizationAndAdmin, verifytokenandauthorization }=require('../middleware/auth.middleware')
-
+const { verifytokenandauthorizationAndAdmin }=require('../middleware/auth.middleware')
+const upload = require("../middleware/fileupload")
 
 //UPDATE ANY USER
 router.put('/updateanyuser/:id', verifytokenandauthorizationAndAdmin , AdminController.updateanyuser)
@@ -18,6 +18,7 @@ router.post('/showsingle', verifytokenandauthorizationAndAdmin , AdminController
 //UPDATE ANY PRODUCT
 router.put('/updateproduct/:id', verifytokenandauthorizationAndAdmin , AdminController.updateproduct)
 //uoload product image
+router.post('/addproductimg/:id', verifytokenandauthorizationAndAdmin , upload.single('img') , AdminController.addproductimg)
 
 //DELETE PRODUCT
 router.delete('/deleteanyproduct/:id', verifytokenandauthorizationAndAdmin , AdminController.deleteproduct)
@@ -34,5 +35,9 @@ router.post("/showsinglecart" ,verifytokenandauthorizationAndAdmin ,AdminControl
 router.get('/showorders' ,verifytokenandauthorizationAndAdmin ,AdminController.showorders)
 
 //showprofits
+router.get('/showprofits' ,verifytokenandauthorizationAndAdmin ,AdminController.showprofits)
+
 //addnewadmin
+router.post('/addnewadmin',verifytokenandauthorizationAndAdmin,AdminController.addnewadmin)
+
 module.exports=router

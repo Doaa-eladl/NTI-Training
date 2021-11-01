@@ -9,7 +9,7 @@ const CartSchema=mongoose.Schema({
     productsId:[
         {
             productId:{type:String , trim:true} ,
-            quantity:{ type:Number , default:1 }
+            quantity:{ type:Number , default:0 }
         }
     ],
     totalprice:{type:Number,default:0}

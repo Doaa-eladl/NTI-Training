@@ -5,6 +5,7 @@ const app=express()
 
 const corse=require('cors')
 app.use(corse())
+
 app.use(express.json())
 //send file or images
 app.use(express.urlencoded({extended:true}))

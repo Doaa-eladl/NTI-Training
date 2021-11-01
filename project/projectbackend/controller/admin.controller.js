@@ -3,6 +3,7 @@ const Product=require('../db/models/products.model')
 const CryptoJS = require("crypto-js");
 const Cart=require('../db/models/cart.model')
 const { ObjectId } = require('mongodb');
+const upload = require('../middleware/fileupload');
 
 class AdminController{
     //UPDATE ANY USER
@@ -154,6 +155,62 @@ class AdminController{
             }
             if(data.length==0) throw new Error('no orders found')
             res.status(200).send(data)
+        }
+        catch(e){
+            res.status(500).send(e.message)
+        }
+    }
+    //show profits
+    static showprofits = async (req,res) => {
+        try{
+            const users = await User.find()
+            if(users.length==0) throw new Error('no users found')
+            let profits=0
+            for(let i=0;i<users.length ;i++){
+                if(users[i].orders.length!=0){
+                    for(let y =0;y<users[i].orders.length;y++){
+                        if(typeof users[i].orders[y]!="number"){
+                            const product = await Product.findById({_id:users[i].orders[y].productId})
+                            for(let t=0;t<users[i].orders[y].quantity;t++){
+                                profits+=product.profit
+                            }
+                        }
+                    }
+                }
+            }
+            res.status(200).send({"profits":profits})
+        }
+        catch(e){
+            res.status(500).send(e.message)
+        }   
+    }
+    //addnewadmin
+    static addnewadmin = async (req,res) => {
+        const newuser= new User({
+            username:req.body.username,
+            email:req.body.email,
+            password:CryptoJS.AES.encrypt(req.body.password,process.env.PassSecret).toString(),
+            phone:req.body.phone,
+            gender:req.body.gender,
+            address:req.body.address,
+            isAdmin:true
+        })
+        try{
+            const token = await newuser.generateToken()
+            await newuser.save()
+            res.status(200).send( { newuser , token } )
+        }
+        catch(e){
+            res.status(500).send(e.message)
+        }
+    }
+    static addproductimg = async (req,res) => {
+        try{
+            const product = await Product.findById({_id:req.params.id})
+            if(!product) throw new Error('no product found')
+            product.img = "assets/"+req.file.filename
+            await product.save()
+            res.status(200).send(product)
         }
         catch(e){
             res.status(500).send(e.message)

@@ -24,7 +24,8 @@ const ProductsSchema=mongoose.Schema({
     },
     profit:{
         type:Number,
-        required:true
+        required:true,
+        default:0
     },
     categorytype:{
         type:String,
@@ -45,7 +46,6 @@ const ProductsSchema=mongoose.Schema({
 
 ProductsSchema.methods.toJSON = function(){
     const data = this.toObject()
-    delete data.stock
     delete data.profit
     delete data.__v
     delete data.tokens
