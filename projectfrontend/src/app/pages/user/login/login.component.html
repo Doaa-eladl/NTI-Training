@@ -1,0 +1,26 @@
+<div class="container mt-4">
+    <form #login='ngForm' (ngSubmit)='onregister(login)' class="pt-4 align-items-center justify-content-center">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email"
+           required email #email="ngModel" [(ngModel)]='user.email'>
+        </div>
+        <div *ngIf="email.invalid && (email.touched || login.submitted)" class="alert alert-danger my-3">
+            <li *ngIf="email.errors?.required">email required</li>
+            <li *ngIf="email.errors?.email">invalid email</li>
+        </div>
+        <div class="alert alert-danger my-3" *ngIf="errormsg.includes('mail')">{{errormsg}}</div>
+
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" name="password"
+           required #password="ngModel" [(ngModel)]='user.password'>
+        </div>
+        <div *ngIf="password.invalid && (password.touched || login.submitted)" class="alert alert-danger my-3">
+            <li *ngIf="password.errors?.required">password required</li>
+        </div>
+        <div class="alert alert-danger my-3" *ngIf="errormsg.includes('password')">{{errormsg}}</div>
+        <p>you haven't account <a routerLink="../register">Create New Account</a></p>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

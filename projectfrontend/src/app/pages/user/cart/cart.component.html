@@ -1,0 +1,40 @@
+<div *ngIf="errormsg!=''" class="container bg-danger pt-4 mt-4 text-center align-middle pb-4">
+    {{errormsg}}
+</div>
+<div class="table container pt-4 mt-4 pb-4" *ngIf="errormsg==''">
+    <table>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">id</th>
+            <th scope="col">Title</th>
+            <th scope="col" style="width: 80px;">Quantity</th>
+            <th scope="col" style="width: 120px;">Prouduct Price</th>
+            <th scope="col" style="padding-left:20px;">stock</th>
+            <th scope="col" style="padding-left:20px;">Controls</th>
+          </tr>
+        </thead>
+        <tbody class="pt-4 mt-4">
+          <tr *ngFor='let product of products;let index = index;' class="pt-4 mt-4">
+            <th class="pe-4" scope="row">{{index}}</th>
+            <th class="pe-4" scope="row">{{product.product._id}}</th>
+            <td class="pe-4">{{product.product.title}}</td>
+            <td class="pe-4">{{product.quantity}}</td>
+            <td class="pe-4">{{product.product.price}}</td>
+            <td>{{product.product.stock}}</td>
+            <td>
+                <button type="button" class="btn btn-success ms-2 mt-2 mb-2" style="background-color: darkgreen;" [disabled]="product.product.stock==0" (click)='increasequantity(product.product._id)'>+</button>
+                <button type="button" class="btn btn-primary ms-2 mt-2 mb-2" style="background-color: dodgerblue;" (click)="decreasequantity(product.product._id)">-</button>
+                <button type="button" class="btn btn-danger ms-2 mt-2 mb-2" style="background-color: firebrick;" (click)='deleteitem(product.product._id)'>Delete</button>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-center mt-4 pt-4" style="border: none;">
+        <p>Total {{total}}</p>
+    </div>
+    <div class="d-flex justify-content-center mt-2" style="border: none;">
+        <button type="button" class="btn btn-success" style="background-color: darkgreen;"  routerLink='/user/order'>Order Now</button>
+        <button type="button" class="btn btn-success ms-2" style="background-color: firebrick ; border: none;" (click)='deletecart()'>Delete My Cart</button>
+    </div>
+</div>

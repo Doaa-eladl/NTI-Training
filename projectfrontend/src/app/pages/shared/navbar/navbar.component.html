@@ -1,0 +1,19 @@
+<nav class="navbar navbar-dark bg-dark">
+    <div class="container-md justify-content-center">
+        <ul class="d-flex" style="margin-bottom: 0px; margin-right: 200px;">
+            <li><a class="nav-link text-light" routerLink="">AllProuducts</a></li>
+            <li><a class="nav-link text-light" routerLink="/smartphones">SmartPhones</a></li>
+            <li><a class="nav-link text-light" routerLink="/noteboks">Notebooks</a></li>
+        </ul>
+        <ng-container *ngIf='!_data.isAuthed'>
+            <button type="button" class="btn btn-light me-2" routerLink="user/register">Register</button>
+            <button type="button" class="btn btn-light" routerLink="user/login">Sign In</button>
+        </ng-container>
+        <ng-container *ngIf='_data.isAuthed'>
+            <button type="button" class="btn btn-success me-2" routerLink="user/cart">My Cart</button>
+            <button type="button" class="btn btn-light me-2" routerLink="user/profile">Profile</button>
+            <button type="button" class="btn btn-light me-2" routerLink="user/myorders">My Orders</button>
+            <button type="button" class="btn btn-danger" (click)="logout()">Log Out</button>
+        </ng-container>
+    </div>
+</nav>

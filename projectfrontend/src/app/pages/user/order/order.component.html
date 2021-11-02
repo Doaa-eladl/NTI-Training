@@ -1,0 +1,19 @@
+<div class="container mt-4">
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="card d-flex" style="width: 50vw;">
+            <div class="card-body">
+                <p>user name : {{orderinfo.username}}</p>
+                <p>user phone : {{orderinfo.phone}}</p>
+                <p>user address : {{orderinfo.address}}</p>
+                <div *ngFor='let product of orderinfo.productdata'>
+                    <p>Product Title : {{product.productstitle}}</p>
+                    <p>Product quantity : {{product.quantity}}</p>
+                    <p>Single Product price : {{product.productprice}}</p>
+                </div>
+                <p>Total Price : {{orderinfo.totalprice}}</p>
+            </div>
+            <button type="button" class="btn btn-success mt-2 me-4 align-self-end" style="width: 200px;" (click)='sendorder()'>Send Order To Home</button>
+            <button type="button" class="btn btn-danger mt-2 me-4 mb-4 align-self-end" style="width: 200px;" routerLink="">Cancel</button>
+          </div>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+<section class="container my-3">
+    <form #registerUser="ngForm" (ngSubmit)="register(registerUser)">
+        <div class="row mb-3">
+            <input class="form-control" name='username' placeholder="your name"  required [(ngModel)]="userData.username" #username="ngModel">
+            <span class="alert alert-danger my-3" *ngIf="username.invalid && (registerUser.submitted || username.touched || username.dirty)">
+                <p *ngIf="username.errors?.required"> * name is required </p>
+            </span>
+        </div>
+        <div class="row mb-3">
+            <input class="form-control" name='email' placeholder="your email" required email [(ngModel)]="userData.email" #email="ngModel">
+            <span class="alert alert-danger my-3" *ngIf="email.invalid && (registerUser.submitted || email.touched || email.dirty)">
+                <p *ngIf="email.errors?.required"> * email is required </p>
+                <p *ngIf="email.errors?.email"> * email not valid</p>
+            </span>
+            <span class="alert alert-danger my-3" *ngIf="emailError!=''">{{emailError}}</span>
+        </div>
+        <div class="row mb-3">
+            <input class="form-control" name='password' placeholder="your password" required [(ngModel)]="userData.password" #password="ngModel" type="password">
+            <span class="alert alert-danger my-3" *ngIf="password.invalid && (registerUser.submitted || password.touched || password.dirty)">
+                <p *ngIf="password.errors?.required"> * password is required </p>
+            </span>
+        </div>
+        <div class="row mb-3">
+            <input class="form-control" name='phone' placeholder="your phone" required [(ngModel)]="userData.phone" #phone="ngModel" pattern="^01[0-2,5]{1}[0-9]{8}$">
+            <span class="alert alert-danger my-3" *ngIf="phone.invalid && (registerUser.submitted || phone.touched || phone.dirty)">
+                <p *ngIf="phone.errors?.required"> * phone is required </p>
+                <p *ngIf="phone.errors?.pattern"> * invalid phone number </p>
+            </span>
+        </div>
+        <div class="row mb-3">
+            <select class="form-control " name="gender" required [(ngModel)]="userData.gender" #gender="ngModel">
+                <option disabled selected>select gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+            <span class="alert alert-danger my-3" *ngIf="gender.invalid && (registerUser.submitted || gender.touched || gender.dirty)">
+                <p *ngIf="gender.errors?.required"> * gender is required </p>
+            </span>
+        </div>
+        <div class="row mb-3">
+            <input class="form-control" name='address' placeholder="your address" required [(ngModel)]="userData.address" #address="ngModel">
+            <span class="alert alert-danger my-3" *ngIf="address.invalid && (registerUser.submitted || address.touched || address.dirty)">
+                <p *ngIf="address.errors?.required"> * address is required </p>
+            </span>
+        </div>
+        <p>Do you alredy have an account ? <a routerLink="../login">Sign In</a></p>
+        <div class="row mb-3">
+            <button class="btn btn-primary">Register</button>
+        </div>
+    </form>
+</section>
