@@ -7,6 +7,7 @@ import { SmartphonesComponent } from './pages/public/smartphones/smartphones.com
 import { CartComponent } from './pages/user/cart/cart.component';
 import { ChangepasswordComponent } from './pages/user/changepassword/changepassword.component';
 import { LoginComponent } from './pages/user/login/login.component';
+import { MyordersComponent } from './pages/user/myorders/myorders.component';
 import { OrderComponent } from './pages/user/order/order.component';
 import { ProfileComponent } from './pages/user/profile/profile.component';
 import { RegisterComponent } from './pages/user/register/register.component';
@@ -22,6 +23,7 @@ const routes: Routes = [
     {path:"changepass", component:ChangepasswordComponent},
     {path:"cart", component:CartComponent},
     {path:"order", component:OrderComponent},
+    {path:"myorders", component:MyordersComponent},
   ]},
   {path:"admin" ,children:[
     {path:"profile", component:AdminprofileComponent},

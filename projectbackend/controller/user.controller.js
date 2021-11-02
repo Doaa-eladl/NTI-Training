@@ -2,6 +2,7 @@ const User=require('../db/models/user.model')
 const Product=require('../db/models/products.model')
 const Cart=require('../db/models/cart.model')
 const CryptoJS = require("crypto-js");
+const Myorders = require('../db/models/myorders.model');
 
 class UserController{
     //REGISTER
@@ -341,13 +342,22 @@ class UserController{
         try{
             const cart = await Cart.findOne({userId:req.user.id})
             if(!cart) throw new Error('this user has no cart yet')
-            const user = await User.findById({_id:req.user.id})
-            const total = cart.totalprice
-            const neworder = {total:total , prouducts:{...cart.productsId}}
-            req.user.orders.push(neworder)
-            await req.user.save()
+            const userorders = await Myorders.findOne( { userId:req.user.id } )
+            //has no cart creat one
+            if(!userorders){
+                const neworder = new Myorders( { userId:req.user.id} )
+                const info = {productsId:cart.productsId ,totalprice:cart.totalprice}
+                neworder.orders.push(info)
+                await neworder.save()
+                res.status(200).send(neworder)
+            }
+            else{
+                const info = {productsId:cart.productsId ,totalprice:cart.totalprice}
+                userorders.orders.push(info)
+                await userorders.save()
+                res.status(200).send(userorders)
+            }
             await Cart.findOneAndDelete({userId:req.user.id})
-            res.status(200).send(req.user.orders)
         }
         catch(e){
             res.status(500).send(e.message)
@@ -356,9 +366,9 @@ class UserController{
     // if user want to see his order but i have problem in frontend
     static showuserorder = async (req,res) => {
         try{
-            const user = await User.findById({_id:req.user.id})
-            if(user.orders.length==0) throw new Error('no order')
-            res.status(200).send(user.orders)
+            const userorder = await Myorders.findOne({userId:req.user.id})
+            if(!userorder) throw new Error('no order')
+            res.status(200).send(userorder)
         }
         catch(e){
             res.status(500).send(e.message)

@@ -28,7 +28,7 @@ export class OrderComponent implements OnInit {
         console.log(err.text) },
       ()=>{
         alert('Order has been sent successfully')
-        this.router.navigateByUrl('')
+        this.router.navigateByUrl('/user/myorders')
       }
     )
   }

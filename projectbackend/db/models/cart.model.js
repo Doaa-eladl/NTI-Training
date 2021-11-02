@@ -8,7 +8,7 @@ const CartSchema=mongoose.Schema({
     },
     productsId:[
         {
-            productId:{type:String , trim:true} ,
+            productId:[] ,
             quantity:{ type:Number , default:0 }
         }
     ],

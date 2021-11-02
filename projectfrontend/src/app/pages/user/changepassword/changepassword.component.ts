@@ -35,7 +35,10 @@ export class ChangepasswordComponent implements OnInit {
             this._data.logoutall().subscribe(
               (data) => { console.log(data) } ,
               (e) => { console.log(e.error) },
-              () => { this._data.isAuthed=false }
+              () => { 
+                this._data.isAuthed=false
+                this._data.isAdmin =false
+               }
             )
           }
           this.router.navigateByUrl('/')

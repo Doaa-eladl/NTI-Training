@@ -3,6 +3,7 @@ const AdminController=require('../controller/admin.controller')
 const { verifytokenandauthorizationAndAdmin }=require('../middleware/auth.middleware')
 const upload = require("../middleware/fileupload")
 
+//show single user
 //UPDATE ANY USER
 router.put('/updateanyuser/:id', verifytokenandauthorizationAndAdmin , AdminController.updateanyuser)
 //DELETE ANY USER
@@ -11,15 +12,15 @@ router.delete('/deleteanyuser/:id', verifytokenandauthorizationAndAdmin , AdminC
 router.get('/showallusers', verifytokenandauthorizationAndAdmin , AdminController.showallusers)
 //GET USER STATS
 router.get('/stats', verifytokenandauthorizationAndAdmin , AdminController.stats)
+
 //ADD PRODUCTS
 router.post('/addproduct', verifytokenandauthorizationAndAdmin , AdminController.product)
-//show single
+//show single product
 router.post('/showsingle', verifytokenandauthorizationAndAdmin , AdminController.showsingle)
 //UPDATE ANY PRODUCT
 router.put('/updateproduct/:id', verifytokenandauthorizationAndAdmin , AdminController.updateproduct)
 //uoload product image
 router.post('/addproductimg/:id', verifytokenandauthorizationAndAdmin , upload.single('img') , AdminController.addproductimg)
-
 //DELETE PRODUCT
 router.delete('/deleteanyproduct/:id', verifytokenandauthorizationAndAdmin , AdminController.deleteproduct)
 
@@ -34,10 +35,10 @@ router.post("/showsinglecart" ,verifytokenandauthorizationAndAdmin ,AdminControl
 //show all orders
 router.get('/showorders' ,verifytokenandauthorizationAndAdmin ,AdminController.showorders)
 
-//showprofits
+//show profits
 router.get('/showprofits' ,verifytokenandauthorizationAndAdmin ,AdminController.showprofits)
 
-//addnewadmin
+//add new admin
 router.post('/addnewadmin',verifytokenandauthorizationAndAdmin,AdminController.addnewadmin)
 
 module.exports=router

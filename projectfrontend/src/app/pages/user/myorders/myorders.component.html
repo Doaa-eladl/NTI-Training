@@ -1,1 +1,9 @@
-<p>myorders works!</p>
+<div style="width: 50vw; margin: auto;">
+    <div *ngFor='let order of orders' class="card mt-4">
+        <p>Total Price : {{order.totalprice}}</p>
+        <div *ngFor='let product of order.productsId'>
+            <p>Product Id : {{product.productId}}</p>
+            <p>Product Quantity : {{product.quantity}}</p>
+        </div>
+    </div>
+</div>

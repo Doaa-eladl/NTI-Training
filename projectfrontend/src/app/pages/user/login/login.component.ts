@@ -26,9 +26,11 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', data.token)
           if(data.user.isAdmin==true){
             this.router.navigateByUrl('/admin/profile')
+            this._data.isAdmin = true
           }
           else{
             this.router.navigateByUrl('/user/profile')
+            this._data.isAuthed=true
           }
         },
         (err:any)=>{
@@ -37,7 +39,6 @@ export class LoginComponent implements OnInit {
         ()=>{
           this.errormsg=""
           login.resetForm()
-          this._data.isAuthed=true
         }
       )
     }

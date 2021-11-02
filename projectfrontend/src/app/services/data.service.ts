@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class DataService {
   public isAuthed = false
+  public isAdmin = false
 
   constructor(private _http:HttpClient) { }
 
@@ -66,5 +67,8 @@ export class DataService {
   }
   logoutall():Observable<any>{
     return this._http.get('http://localhost:3000/auth/logoutall')
+  }
+  showuserorder():Observable<any>{
+    return this._http.get('http://localhost:3000/user/showuserorder')
   }
 }
