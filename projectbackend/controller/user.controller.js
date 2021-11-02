@@ -343,7 +343,7 @@ class UserController{
             if(!cart) throw new Error('this user has no cart yet')
             const user = await User.findById({_id:req.user.id})
             const total = cart.totalprice
-            const neworder = {"total":total , "prouducts":{...cart.productsId}}
+            const neworder = {total:total , prouducts:{...cart.productsId}}
             req.user.orders.push(neworder)
             await req.user.save()
             await Cart.findOneAndDelete({userId:req.user.id})
