@@ -1,0 +1,61 @@
+<form class="container mt-4" style="width: 50vw;" #addnewproduct='ngForm' (ngSubmit)="editproduct(addnewproduct)">
+    <div class="mb-3">
+      <label>product title :</label>
+      <input class="form-control" required name="title" #title="ngModel" [(ngModel)]="productData.title" >
+      <div class="alert alert-danger my-3" *ngIf="title.invalid && (addnewproduct.submitted || title.dirty ||title.touched)">
+            <p *ngIf="title.errors?.required"> * title is required </p>
+      </div>
+      <div class="alert alert-danger my-3" *ngIf="errmsg!=''">{{errmsg}}</div>
+    </div>
+
+    <div class="mb-3">
+      <label>product description :</label>
+      <textarea class="form-control" required name="desc" #desc="ngModel" [(ngModel)]="productData.desc"  rows="4" cols="50"></textarea>
+      <div class="alert alert-danger my-3" *ngIf="desc.invalid && (addnewproduct.submitted || desc.dirty ||desc.touched)">
+        <p *ngIf="desc.errors?.required"> * desc is required </p>
+    </div>
+    </div>
+    <div class="mb-3">
+      <label>product price :</label>
+      <input class="form-control" required name="price" pattern="^(0|[1-9][0-9]*)$" #price="ngModel" [(ngModel)]="productData.price" >
+      <div class="alert alert-danger my-3" *ngIf="price.invalid && (addnewproduct.submitted || price.dirty ||price.touched)">
+        <p *ngIf="price.errors?.required"> * price is required </p>
+        <p *ngIf="price.errors?.pattern"> * price must be number </p>
+    </div>
+    </div>
+    <div class="mb-3">
+      <label>product stock :</label>
+      <input class="form-control" required name="stock" pattern="^(0|[1-9][0-9]*)$" #stock="ngModel" [(ngModel)]="productData.stock" >
+      <div class="alert alert-danger my-3" *ngIf="stock.invalid && (addnewproduct.submitted || stock.dirty ||stock.touched)">
+        <p *ngIf="stock.errors?.required"> * stock is required </p>
+        <p *ngIf="stock.errors?.pattern"> * stock must be number </p>
+    </div>
+    </div>
+    <div class="mb-3">
+      <label>product profit :</label>
+      <input class="form-control" required name="profit" pattern="^(0|[1-9][0-9]*)$" #profit="ngModel" [(ngModel)]="productData.profit" >
+      <div class="alert alert-danger my-3" *ngIf="profit.invalid && (addnewproduct.submitted || profit.dirty ||profit.touched)">
+        <p *ngIf="profit.errors?.required"> * profit is required </p>
+        <p *ngIf="profit.errors?.pattern"> * profit must be number </p>
+    </div>
+    </div>
+    <div class="mb-3">
+      <label>product size :</label>
+      <input class="form-control" required name="size" #size="ngModel" [(ngModel)]="productData.size" >
+      <div class="alert alert-danger my-3" *ngIf="size.invalid && (addnewproduct.submitted || size.dirty ||size.touched)">
+        <p *ngIf="size.errors?.required"> * size is required </p>
+        <p *ngIf="size.errors?.pattern"> * size must be number </p>
+    </div>
+    </div>
+    <div class="mb-3">
+        <label>Choose product categorytype :</label>
+        <select name="categorytype" required class="ms-4" #categorytype="ngModel" [(ngModel)]="productData.categorytype" >
+          <option value="smartphones">smartphones</option>
+          <option value="notebooks">notebooks</option>
+        </select>
+        <div class="alert alert-danger my-3" *ngIf="categorytype.invalid && addnewproduct.submitted">
+          <p *ngIf="categorytype.errors?.required"> * categorytype is required </p>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Edit</button>
+</form>

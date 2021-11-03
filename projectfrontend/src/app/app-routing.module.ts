@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AddnewproductComponent } from './pages/admin/addnewproduct/addnewproduct.component';
 import { AdminprofileComponent } from './pages/admin/adminprofile/adminprofile.component';
+import { ShowsingleproductComponent } from './pages/admin/showsingleproduct/showsingleproduct.component';
 import { AllproductsComponent } from './pages/public/allproducts/allproducts.component';
 import { NotebooksComponent } from './pages/public/notebooks/notebooks.component';
 import { SmartphonesComponent } from './pages/public/smartphones/smartphones.component';
@@ -27,6 +29,8 @@ const routes: Routes = [
   ]},
   {path:"admin" ,children:[
     {path:"profile", component:AdminprofileComponent},
+    {path:"addnewproduct", component:AddnewproductComponent},
+    {path:"showsingleproduct/:id", component:ShowsingleproductComponent},
   ]}
 ];
 

@@ -89,7 +89,12 @@ class UserController{
     } 
     //PROFILE
     static profile = async (req,res) => {
-        res.status(200).send(req.user)
+        try{
+            res.status(200).send(req.user)
+        }
+        catch(e){
+            res.status(500).send(e.message)
+        }
     }
     //LOGOUT
     static logout = async (req,res) =>{

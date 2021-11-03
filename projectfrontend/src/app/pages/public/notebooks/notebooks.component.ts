@@ -11,7 +11,7 @@ export class NotebooksComponent implements OnInit {
   msg =''
   addproduct={ productId:'' ,quantity:0}
 
-  constructor(private _data:DataService) { }
+  constructor(public _data:DataService) { }
   ngOnInit(): void {
     this._data.getnotebooks().subscribe(
       (data) => {
@@ -33,6 +33,30 @@ export class NotebooksComponent implements OnInit {
         location.reload();
       }
     )
+    }
+    file:any
+    onChangeFile(event:any){ this.file = event.target.files[0]
+    }
+    upimg(id:String){  
+      const myData = new FormData()
+      myData.append("img",this.file,  this.file.name)
+      console.log(myData)
+      this._data.addproductimg(myData,id).subscribe(data=>{
+        console.log(data),
+        (err:any) => {console.log(err)},
+        () => {
+          //location.reload();
+        }
+        }) 
+      }
+    deleteproductbyadmin(id:String){
+      this._data.deleteproductbyadmin(id).subscribe(
+        () => {},
+        (err) => {console.log(err.error)},
+        () => {
+          location.reload();
+        }
+      )
     }
 
 }

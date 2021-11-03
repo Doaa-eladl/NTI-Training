@@ -15,5 +15,8 @@
             <button type="button" class="btn btn-light me-2" routerLink="user/myorders">My Orders</button>
             <button type="button" class="btn btn-danger" (click)="logout()">Log Out</button>
         </ng-container>
+        <ng-container *ngIf='_data.isAdmin'>
+            <button type="button" class="btn btn-light ms-2" routerLink="admin/profile">Admin</button>
+        </ng-container>
     </div>
 </nav>

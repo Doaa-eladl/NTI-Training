@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
           }
           else{
             this.router.navigateByUrl('/user/profile')
-            this._data.isAuthed=true
           }
         },
         (err:any)=>{
@@ -39,6 +38,8 @@ export class LoginComponent implements OnInit {
         ()=>{
           this.errormsg=""
           login.resetForm()
+          this._data.isAuthed=true
+          this._data.isAdmin=true
         }
       )
     }

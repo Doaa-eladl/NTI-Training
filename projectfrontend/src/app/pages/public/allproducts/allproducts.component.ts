@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-allproducts',
@@ -9,9 +10,12 @@ import { DataService } from 'src/app/services/data.service';
 export class AllproductsComponent implements OnInit {
   allproducts:any ={}
   msg =''
+  
   addproduct={ productId:'' ,quantity:0}
 
-  constructor(private _data:DataService) { }
+  constructor(public _data:DataService ,
+    private router:Router,
+    ) { }
 
   ngOnInit(): void {
     this._data.getallproducts().subscribe(
@@ -19,7 +23,7 @@ export class AllproductsComponent implements OnInit {
         this.allproducts = data
       },
       (e) => { this.msg=e.message; console.log(e.message) },
-      ()=>{ /*userData.resetForm()*/ }
+      ()=>{  }
       )
   }
   addtocart(id:any,quantity:any){
@@ -34,6 +38,29 @@ export class AllproductsComponent implements OnInit {
         location.reload();
       }
     )
+  }
+  file:any
+  onChangeFile(event:any){ this.file = event.target.files[0]
+  }
+  upimg(id:String){  
+    const myData = new FormData()
+    myData.append("img",this.file,  this.file.name)
+    console.log(myData)
+    this._data.addproductimg(myData,id).subscribe(data=>{
+      console.log(data),
+      (err:any) => {console.log(err)},
+      () => {
+        //location.reload();
+      }
+      }) 
     }
-
+  deleteproductbyadmin(id:String){
+    this._data.deleteproductbyadmin(id).subscribe(
+      () => {},
+      (err) => {console.log(err.error)},
+      () => {
+        location.reload();
+      }
+    )
+  }
 }

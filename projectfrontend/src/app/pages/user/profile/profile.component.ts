@@ -33,7 +33,7 @@ export class ProfileComponent implements OnInit {
         this.updateuser.patchValue(data)
       },
       (err) => {
-        alert(err.error.text)
+        console.log(err.error)
       }
     )
   }
@@ -53,7 +53,7 @@ export class ProfileComponent implements OnInit {
   deleteuser(){
     this._data.deleteuser().subscribe(
       (data)=>{ console.log(data) },
-      (e)=>{console.log(e)},
+      (e)=>{console.log(e.error)},
       () =>{
         alert('user deleted')
         localStorage.removeItem('token');

@@ -16,6 +16,7 @@ export class AuthInterceptor implements HttpInterceptor {
     const token = localStorage.getItem('token')
     if(token){
       this._data.isAuthed=true
+      this._data.isAdmin = true
       request = request.clone({
         headers: request.headers.set("token", `Bearer ${token}`)
       })

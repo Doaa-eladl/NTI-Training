@@ -65,11 +65,10 @@ class AdminController{
     }
     //ADD PRODUCTS
     static product = async (req,res) =>{
-        const newproduct = new Product(req.body)
         try{
-            const token = await newproduct.generateToken()
+            const newproduct = new Product(req.body)
             await newproduct.save()
-            res.status(200).send({newproduct , token})
+            res.status(200).send(newproduct)
         }
         catch(e){
             res.status(500).send(e.message)
@@ -92,7 +91,7 @@ class AdminController{
     static deleteproduct = async (req,res)=>{
         try{
             await Product.findOneAndDelete({_id:req.params.id})
-            res.status(200).send('Product deleted')
+            res.status(200).send({message:'Product deleted'})
         }
         catch(e){
             res.status(500).send(e.message)
@@ -101,7 +100,7 @@ class AdminController{
     //GET PRODUCT
     static showsingle = async (req,res) =>{
         try{
-            const product = await Product.findById(req.body.id)
+            const product = await Product.findById(req.params.id)
             res.status(200).send(product)
         }
         catch(e){

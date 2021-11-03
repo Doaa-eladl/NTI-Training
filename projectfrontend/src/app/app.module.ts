@@ -19,6 +19,8 @@ import { AdminprofileComponent } from './pages/admin/adminprofile/adminprofile.c
 import { CartComponent } from './pages/user/cart/cart.component';
 import { OrderComponent } from './pages/user/order/order.component';
 import { MyordersComponent } from './pages/user/myorders/myorders.component';
+import { AddnewproductComponent } from './pages/admin/addnewproduct/addnewproduct.component';
+import { ShowsingleproductComponent } from './pages/admin/showsingleproduct/showsingleproduct.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { MyordersComponent } from './pages/user/myorders/myorders.component';
     CartComponent,
     OrderComponent,
     MyordersComponent,
+    AddnewproductComponent,
+    ShowsingleproductComponent,
   ],
   imports: [
     BrowserModule,

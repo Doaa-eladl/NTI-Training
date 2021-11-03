@@ -39,16 +39,13 @@ const ProductsSchema=mongoose.Schema({
         required:true
     },
     img:{},
-    tokens:[ { token: { type:String , required:true } } ]
     },
     { timestamps : true}
 )
 
 ProductsSchema.methods.toJSON = function(){
     const data = this.toObject()
-    delete data.profit
     delete data.__v
-    delete data.tokens
     return data
 }
 

@@ -71,4 +71,19 @@ export class DataService {
   showuserorder():Observable<any>{
     return this._http.get('http://localhost:3000/user/showuserorder')
   }
+  addproduct(product:any):Observable<any>{
+    return this._http.post('http://localhost:3000/admin/addproduct',product)
+  }
+  addproductimg(product:any,id:String):Observable<any>{
+    return this._http.post(`http://localhost:3000/admin/addproductimg/${id}`,product)
+  }
+  deleteproductbyadmin(id:String):Observable<any>{
+    return this._http.delete(`http://localhost:3000/admin/deleteanyproduct/${id}`)
+  }
+  showsingle(id:any):Observable<any>{
+    return this._http.get(`http://localhost:3000/admin/showsingle/${id}`)
+  }
+  updateproduct(product:any,id:any):Observable<any>{
+    return this._http.put(`http://localhost:3000/admin/updateproduct/${id}`,product)
+  }
 }
