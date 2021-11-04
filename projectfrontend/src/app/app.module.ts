@@ -21,6 +21,8 @@ import { OrderComponent } from './pages/user/order/order.component';
 import { MyordersComponent } from './pages/user/myorders/myorders.component';
 import { AddnewproductComponent } from './pages/admin/addnewproduct/addnewproduct.component';
 import { ShowsingleproductComponent } from './pages/admin/showsingleproduct/showsingleproduct.component';
+import { ShowallcartsComponent } from './pages/admin/showallcarts/showallcarts.component';
+import { ShowallordersComponent } from './pages/admin/showallorders/showallorders.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { ShowsingleproductComponent } from './pages/admin/showsingleproduct/show
     MyordersComponent,
     AddnewproductComponent,
     ShowsingleproductComponent,
+    ShowallcartsComponent,
+    ShowallordersComponent,
   ],
   imports: [
     BrowserModule,

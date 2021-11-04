@@ -16,14 +16,12 @@ export class NotebooksComponent implements OnInit {
     this._data.getnotebooks().subscribe(
       (data) => {
         this.notebooks = data
-        if(this._data.isAdmin==true) this._data.isAdmin=false
       },
       (e) => { 
         this.msg=e.message
         console.log(e.message)
-        if(this._data.isAdmin==true) this._data.isAdmin=false
       },
-      ()=>{ /*userData.resetForm()*/ }
+      ()=>{  }
       )
   }
   addtocart(id:any,quantity:any){
@@ -35,7 +33,7 @@ export class NotebooksComponent implements OnInit {
       (data) => { console.log(data) },
       (e) => {console.log(e.error)},
       () => {
-        location.reload();
+        this.ngOnInit()
       }
     )
     }
@@ -59,7 +57,7 @@ export class NotebooksComponent implements OnInit {
         () => {},
         (err) => {console.log(err.error)},
         () => {
-          location.reload();
+          this.ngOnInit()
         }
       )
     }

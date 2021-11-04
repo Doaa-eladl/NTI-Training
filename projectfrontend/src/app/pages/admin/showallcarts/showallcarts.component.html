@@ -1,0 +1,28 @@
+<div>
+    <div *ngIf="nocarts" class="container bg-danger pt-4 mt-4 text-center align-middle pb-4">
+      There is no user carts
+    </div>
+    <div class="table container pt-4 mt-4 pb-4"  *ngIf="!nocarts">
+        <table *ngFor='let user of carts'>
+            <p>Total {{user.totalprice}}</p>
+            <p>User Id {{user.userId}}</p>
+            <table *ngFor="let product of user.productsId">
+              <thead>
+                <tr>
+                  <th>product Id</th>
+                  <th>product quantity</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>{{product.productId}}</th>
+                  <th style="padding-left:50px;">{{product.quantity}}</th>
+                </tr>
+              </tbody>
+            </table>
+            <div class="d-flex justify-content-center mt-2" style="border: none;">
+                <button type="button" class="btn btn-success ms-2 mb-2" style="background-color: firebrick ; border: none;" (click)='deletecart(user.userId)'>Delete his Cart</button>
+            </div>
+      </table>
+    </div>
+</div>

@@ -223,7 +223,6 @@ class UserController{
             let mycart = await Cart.find( { userId:req.user.id } )
             if(!mycart) throw new Error('this user has no cart yet')
             //ارجع ال stock تاني
-            //console.log(mycart[0].productsId.length)
             for(let i=0;i<mycart[0].productsId.length;i++){
                 const product = await Product.findById( { _id:mycart[0].productsId[i].productId } )
                 product.stock+=mycart[0].productsId[i].quantity

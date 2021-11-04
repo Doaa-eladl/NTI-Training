@@ -21,14 +21,12 @@ export class AllproductsComponent implements OnInit {
     this._data.getallproducts().subscribe(
       (data) => {
         this.allproducts = data
-        if(this._data.isAdmin==true) this._data.isAdmin=false
       },
       (e) => { 
         this.msg=e.message
         console.log(e.message)
-        if(this._data.isAdmin==true) this._data.isAdmin=false
        },
-      ()=>{  }
+      ()=>{ }
       )
   }
   addtocart(id:any,quantity:any){
@@ -40,7 +38,7 @@ export class AllproductsComponent implements OnInit {
       (data) => { console.log(data) },
       (e) => {console.log(e.error)},
       () => {
-        location.reload();
+        this.ngOnInit()
       }
     )
   }
@@ -64,7 +62,7 @@ export class AllproductsComponent implements OnInit {
       () => {},
       (err) => {console.log(err.error)},
       () => {
-        location.reload();
+        this.ngOnInit()
       }
     )
   }

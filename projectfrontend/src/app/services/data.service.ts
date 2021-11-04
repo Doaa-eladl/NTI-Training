@@ -89,4 +89,7 @@ export class DataService {
   showallcarts():Observable<any>{
     return this._http.get(`http://localhost:3000/admin/showcarts`)
   }
+  deletecartbyadmin(userId:any):Observable<any>{
+    return this._http.delete('http://localhost:3000/admin/deleteusercart',{body:userId})
+  }
 }

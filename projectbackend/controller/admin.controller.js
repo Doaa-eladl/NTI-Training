@@ -4,6 +4,7 @@ const CryptoJS = require("crypto-js");
 const Cart=require('../db/models/cart.model')
 const { ObjectId } = require('mongodb');
 const upload = require('../middleware/fileupload');
+const Myorders = require('../db/models/myorders.model');
 
 class AdminController{
     //UPDATE ANY USER
@@ -113,8 +114,15 @@ class AdminController{
             const usercart = await Cart.find( { userId:req.body.userId } )
             //check not found for array
             if(usercart.length==0) throw new Error('this user has no cart yet')
+            
+            //ارجع ال stock تاني
+            for(let i=0;i<usercart[0].productsId.length;i++){
+                const product = await Product.findById( { _id:usercart[0].productsId[i].productId } )
+                product.stock+=usercart[0].productsId[i].quantity
+                await product.save()
+            }
             await Cart.deleteOne( { usercart } )
-            res.status(200).send('user cart has been deleted')
+            res.status(200).send({message:'user cart has been deleted'})
         }
         catch(e){
             res.status(500).send(e.message)
@@ -145,15 +153,9 @@ class AdminController{
     //show all users orders
     static showorders = async (req,res) => {
         try{
-            const users = await User.find()
-            if(users.length==0) throw new Error('no users found')
-            let data =[]
-            for(let i=0;i<users.length ;i++){
-                data.push( { useerid:users[i]._id , username:users[i].username ,orders:users[i].orders } )
-                console.log(data)
-            }
-            if(data.length==0) throw new Error('no orders found')
-            res.status(200).send(data)
+            const userorders = await Myorders.find()
+            if(userorders.length==0) throw new Error('no orders found')
+            res.status(200).send(userorders)
         }
         catch(e){
             res.status(500).send(e.message)
