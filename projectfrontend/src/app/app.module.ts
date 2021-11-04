@@ -23,6 +23,7 @@ import { AddnewproductComponent } from './pages/admin/addnewproduct/addnewproduc
 import { ShowsingleproductComponent } from './pages/admin/showsingleproduct/showsingleproduct.component';
 import { ShowallcartsComponent } from './pages/admin/showallcarts/showallcarts.component';
 import { ShowallordersComponent } from './pages/admin/showallorders/showallorders.component';
+import { AddnewadminComponent } from './pages/admin/addnewadmin/addnewadmin.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { ShowallordersComponent } from './pages/admin/showallorders/showallorder
     ShowsingleproductComponent,
     ShowallcartsComponent,
     ShowallordersComponent,
+    AddnewadminComponent,
   ],
   imports: [
     BrowserModule,

@@ -32,13 +32,13 @@ router.get("/showcarts" ,verifytokenandauthorizationAndAdmin ,AdminController.sh
 //DELETE USER CART BY ADMIN ******
 router.delete('/deleteusercart' ,verifytokenandauthorizationAndAdmin ,AdminController.deleteusercart)
 
-//show all orders
+//show all orders ******
 router.get('/showorders' ,verifytokenandauthorizationAndAdmin ,AdminController.showorders)
 
 //show profits
 router.get('/showprofits' ,verifytokenandauthorizationAndAdmin ,AdminController.showprofits)
 
-//add new admin
+//add new admin ******
 router.post('/addnewadmin',verifytokenandauthorizationAndAdmin,AdminController.addnewadmin)
 
 module.exports=router
