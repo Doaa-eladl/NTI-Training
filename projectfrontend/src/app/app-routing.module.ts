@@ -28,7 +28,7 @@ const routes: Routes = [
     {path:"myorders", component:MyordersComponent},
   ]},
   {path:"admin" ,children:[
-    {path:"profile", component:AdminprofileComponent},
+    {path:"", component:AdminprofileComponent},
     {path:"addnewproduct", component:AddnewproductComponent},
     {path:"showsingleproduct/:id", component:ShowsingleproductComponent},
   ]}

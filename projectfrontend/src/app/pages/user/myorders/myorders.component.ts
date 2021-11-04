@@ -15,8 +15,11 @@ export class MyordersComponent implements OnInit {
       (data) => {  
       this.orders=data.orders
       console.log(this.orders)
+      if(this._data.isAdmin==true) this._data.isAdmin=false
     },
-      (e) => { console.log(e.error) }
+      (e) => { console.log(e.error) 
+        if(this._data.isAdmin==true) this._data.isAdmin=false
+      }
     )
   }
 

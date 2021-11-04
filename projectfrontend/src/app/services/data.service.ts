@@ -86,4 +86,7 @@ export class DataService {
   updateproduct(product:any,id:any):Observable<any>{
     return this._http.put(`http://localhost:3000/admin/updateproduct/${id}`,product)
   }
+  showallcarts():Observable<any>{
+    return this._http.get(`http://localhost:3000/admin/showcarts`)
+  }
 }

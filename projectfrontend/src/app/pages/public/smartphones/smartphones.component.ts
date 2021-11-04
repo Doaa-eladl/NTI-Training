@@ -17,8 +17,13 @@ export class SmartphonesComponent implements OnInit {
     this._data.getsmartphones().subscribe(
       (data) => {
         this.smartphones = data
+        if(this._data.isAdmin==true) this._data.isAdmin=false
       },
-      (e) => { this.msg=e.message; console.log(e.message) },
+      (e) => { 
+        this.msg=e.message
+        console.log(e.message)
+        if(this._data.isAdmin==true) this._data.isAdmin=false
+      },
       ()=>{ /*userData.resetForm()*/ }
       )
   }

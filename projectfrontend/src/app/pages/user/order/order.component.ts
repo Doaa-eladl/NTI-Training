@@ -14,10 +14,14 @@ export class OrderComponent implements OnInit {
 
   ngOnInit(): void {
     this._data.showorder().subscribe(
-      (data)=>{ this.orderinfo=data  },
+      (data)=>{ 
+        this.orderinfo=data 
+       },
       (err:any)=>{ 
-        console.log(err.text) },
-      ()=>{  }
+        console.log(err.text)
+       },
+      ()=>{ 
+       }
     )
   }
 

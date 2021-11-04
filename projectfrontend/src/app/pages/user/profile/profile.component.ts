@@ -31,6 +31,8 @@ export class ProfileComponent implements OnInit {
       (data:any)=>{
         this.userData = data
         this.updateuser.patchValue(data)
+        //مش عارفه ليه بس لما دخل ال api بيخلي ال isADdmin=true
+        if(data.isAdmin==false) this._data.isAdmin=false
       },
       (err) => {
         console.log(err.error)

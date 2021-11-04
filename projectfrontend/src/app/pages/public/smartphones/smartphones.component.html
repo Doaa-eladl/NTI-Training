@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row mt-4 justify-content-center">
-        <div *ngFor="let product of smartphones" class="card ms-2 mt-2 pt-2 pb-2" style="width: 18rem;">
+        <div *ngFor="let product of smartphones" class="card ms-2 mt-2 pt-2 pb-2" style="width: 22rem;">
             <img class="card-img-top" [src]="product.img" alt="smart phone">
             <div class="card-body">
               <h5 class="card-title">{{product.title}}</h5>
@@ -18,17 +18,18 @@
                 <p class="card-text">Product Stock</p>
                 <p class="card-text">{{product.stock}}</p>
               </div>   
-              <form class="d-flex mb-4 justify-content-between" #quantity='ngForm'>
-                <label>Quantity : </label>
-                <input type="number" name="quantity" [disabled]='(product.stock==0)' style=" width:120px;" max="{{product.stock}}" ngModel #quantity="ngModel">
-              </form>
-              <span class="alert alert-danger my-3" *ngIf="quantity.invalid && (quantity.touched || quantity.dirty)">
-                No stock
-              </span>     
-              <div class="d-flex  justify-content-center" *ngIf="!_data.isAdmin">
-                <button [disabled]="product.stock==0" class="btn btn-success" (click)='addtocart(product._id,quantity.value)'>Add To Cart</button>
-              </div> 
-
+              <div *ngIf="!_data.isAdmin">
+                <form class="d-flex mb-4 justify-content-between" #quantity='ngForm'>
+                  <label>Quantity : </label>
+                  <input type="number" name="quantity" [disabled]='(product.stock==0)' style=" width:120px;" max="{{product.stock}}" ngModel #quantity="ngModel">
+                </form>
+                <span class="alert alert-danger my-3" *ngIf="quantity.invalid && (quantity.touched || quantity.dirty)">
+                  No stock
+                </span>     
+                <div class="d-flex  justify-content-center" *ngIf="!_data.isAdmin">
+                  <button [disabled]="product.stock==0" class="btn btn-success" (click)='addtocart(product._id,quantity.value)'>Add To Cart</button>
+                </div> 
+              </div>
               <div>
                 <form #pimage = "ngForm" (ngSubmit)="upimg(product._id)" *ngIf='_data.isAdmin' class="d-flex flex-column justify-content-center">
                   <label>Choose product image :</label>
@@ -37,6 +38,9 @@
                 </form>   
               <div class="d-flex  justify-content-center" *ngIf='_data.isAdmin' class='mt-2 d-flex justify-content-center'>
                 <button [disabled]="product.stock==0" class="btn btn-danger" (click)='deleteproductbyadmin(product._id)'>DELETE</button>
+              </div> 
+              <div class="d-flex  justify-content-center" *ngIf='_data.isAdmin' class='mt-2 d-flex justify-content-center'>
+                <button [disabled]="product.stock==0" routerLink="/admin/showsingleproduct/{{product._id}}" class="btn btn-primary">Edit</button>
               </div>
             </div>
         </div>

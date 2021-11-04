@@ -21,8 +21,13 @@ export class AllproductsComponent implements OnInit {
     this._data.getallproducts().subscribe(
       (data) => {
         this.allproducts = data
+        if(this._data.isAdmin==true) this._data.isAdmin=false
       },
-      (e) => { this.msg=e.message; console.log(e.message) },
+      (e) => { 
+        this.msg=e.message
+        console.log(e.message)
+        if(this._data.isAdmin==true) this._data.isAdmin=false
+       },
       ()=>{  }
       )
   }

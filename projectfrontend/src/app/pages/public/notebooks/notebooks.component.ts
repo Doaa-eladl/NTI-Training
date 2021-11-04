@@ -16,8 +16,13 @@ export class NotebooksComponent implements OnInit {
     this._data.getnotebooks().subscribe(
       (data) => {
         this.notebooks = data
+        if(this._data.isAdmin==true) this._data.isAdmin=false
       },
-      (e) => { this.msg=e.message; console.log(e.message) },
+      (e) => { 
+        this.msg=e.message
+        console.log(e.message)
+        if(this._data.isAdmin==true) this._data.isAdmin=false
+      },
       ()=>{ /*userData.resetForm()*/ }
       )
   }

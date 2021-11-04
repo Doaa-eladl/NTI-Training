@@ -12,7 +12,6 @@ import { Router } from '@angular/router';
 export class ChangepasswordComponent implements OnInit {
   userData = { oldpassword:"" , newpass:"" }
   Errormsg = ''
-  openmodel = false;
 
   constructor(private _data:DataService ,
     private router:Router,

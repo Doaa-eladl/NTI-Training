@@ -3,7 +3,7 @@
     <button class="btn btn-danger" routerLink='/admin/addnewproduct'>Add New Product</button>
   </div>
     <div class="row mt-4 justify-content-center align-items-center">
-        <div *ngFor='let product of allproducts' class="card ms-2 mt-2 pt-2 pb-2" style="width: 18rem;">
+        <div *ngFor='let product of allproducts' class="card ms-2 mt-2 pt-2 pb-2" style="width: 22rem;">
             <img class="card-img-top" [src]="product.img" alt="{{product.categorytype}}">
             <div class="card-body">
               <h5 class="card-title">{{product.title}}</h5>
@@ -21,17 +21,18 @@
                   <p class="card-text">Product Stock</p>
                 <p class="card-text">{{product.stock}}</p>
                 </div>   
-                <form class="d-flex mb-4 justify-content-between" #quantity='ngForm'>
-                  <label>Quantity : </label>
-                  <input type="number" name="quantity" [disabled]='(product.stock==0)' style=" width:120px;" max="{{product.stock}}" ngModel #quantity="ngModel">
-                </form>
-                <span class="alert alert-danger my-3" *ngIf="quantity.invalid && (quantity.touched || quantity.dirty)">
-                  No stock
-                </span>     
-                <div class="d-flex  justify-content-center" *ngIf="!_data.isAdmin">
-                  <button [disabled]="product.stock==0" class="btn btn-success" (click)='addtocart(product._id,quantity.value)'>Add To Cart</button>
-                </div> 
-
+                <div *ngIf="!_data.isAdmin">
+                  <form class="d-flex mb-4 justify-content-between" #quantity='ngForm' >
+                    <label >Quantity : </label>
+                    <input type="number" name="quantity" [disabled]='(product.stock==0)' style=" width:120px;" max="{{product.stock}}" ngModel #quantity="ngModel">
+                  </form>
+                  <span class="alert alert-danger my-3" *ngIf="quantity.invalid && (quantity.touched || quantity.dirty)">
+                    No stock
+                  </span>    
+                  <div class="d-flex  justify-content-center" *ngIf="!_data.isAdmin">
+                    <button [disabled]="product.stock==0" class="btn btn-success" (click)='addtocart(product._id,quantity.value)'>Add To Cart</button>
+                  </div> 
+                </div>
                 <div>
                   <form #pimage = "ngForm" (ngSubmit)="upimg(product._id)" *ngIf='_data.isAdmin' class="d-flex flex-column justify-content-center">
                     <label>Choose product image :</label>

@@ -5,18 +5,26 @@
             <li><a class="nav-link text-light" routerLink="/smartphones">SmartPhones</a></li>
             <li><a class="nav-link text-light" routerLink="/noteboks">Notebooks</a></li>
         </ul>
+        <p class="bg-light">
+        </p>
         <ng-container *ngIf='!_data.isAuthed'>
             <button type="button" class="btn btn-light me-2" routerLink="user/register">Register</button>
             <button type="button" class="btn btn-light" routerLink="user/login">Sign In</button>
         </ng-container>
+        <p class="bg-light">
+        </p>
         <ng-container *ngIf='_data.isAuthed'>
-            <button type="button" class="btn btn-success me-2" routerLink="user/cart">My Cart</button>
+            <button type="button" class="btn btn-success me-2" routerLink="user/cart" *ngIf='!_data.isAdmin'>My Cart</button>
             <button type="button" class="btn btn-light me-2" routerLink="user/profile">Profile</button>
-            <button type="button" class="btn btn-light me-2" routerLink="user/myorders">My Orders</button>
+            <button type="button" class="btn btn-light me-2" routerLink="user/myorders" *ngIf='!_data.isAdmin'>My Orders</button>
             <button type="button" class="btn btn-danger" (click)="logout()">Log Out</button>
         </ng-container>
+        <p class="bg-light">
+        </p>
         <ng-container *ngIf='_data.isAdmin'>
-            <button type="button" class="btn btn-light ms-2" routerLink="admin/profile">Admin</button>
+            <button type="button" class="btn btn-light ms-2" routerLink="/admin/">Admin</button>
         </ng-container>
+        <p class="bg-light">
+        </p>
     </div>
 </nav>
