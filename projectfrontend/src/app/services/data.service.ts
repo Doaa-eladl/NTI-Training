@@ -98,4 +98,28 @@ export class DataService {
   addnewadmin(user:any):Observable<any>{
     return this._http.post('http://localhost:3000/admin/addnewadmin',user)
   }
+  showprofits():Observable<any>{
+    return this._http.get(`http://localhost:3000/admin/showprofits`)
+  }
+  showstats():Observable<any>{
+    return this._http.get(`http://localhost:3000/admin/stats`)
+  }
+  showallusers():Observable<any>{
+    return this._http.get(`http://localhost:3000/admin/showallusers`)
+  }
+  deleteuserbyadmin(id:String):Observable<any>{
+    return this._http.delete(`http://localhost:3000/admin/deleteanyuser/${id}`)
+  }
+  showsinglecartbyadmin(id:any):Observable<any>{
+    return this._http.get(`http://localhost:3000/admin/showsinglecart/${id}`)
+  }
+  showsingleorders(id:any):Observable<any>{
+    return this._http.get(`http://localhost:3000/admin/showsingleorders/${id}`)
+  }
+  showsingleuser(id:any):Observable<any>{
+    return this._http.get(`http://localhost:3000/admin/showsingleuser/${id}`)
+  }
+  updateanyuser(user:any,id:any):Observable<any>{
+    return this._http.put(`http://localhost:3000/admin/updateanyuser/${id}`,user)
+  }
 }

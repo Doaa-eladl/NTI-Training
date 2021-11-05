@@ -1,0 +1,40 @@
+<div *ngIf="errormsg!=''" class="container bg-danger pt-4 mt-4 text-center align-middle pb-4">
+    {{errormsg}}
+</div>
+
+<div class="container mt-4" style="margin: auto;">
+    <table class="table" *ngIf="errormsg==''">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">_id</th>
+            <th scope="col">name</th>
+            <th scope="col">email</th>
+            <th scope="col">phone</th>
+            <th scope="col">address</th>
+            <th scope="col">gender</th>
+            <th scope="col">isAdmin</th>
+            <th scope="col">Show</th>
+            <th scope="col">Delete</th>
+            <th scope="col">Show Cart</th>
+            <th scope="col">Show Orders</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let user of usersdata;let i = index">
+          <tr>
+            <th scope="col">{{i}}</th>
+            <th scope="col">{{user._id}}</th>
+            <th scope="col">{{user.username}}</th>
+            <th scope="col">{{user.email}}</th>
+            <th scope="col">{{user.phone}}</th>
+            <th scope="col">{{user.address}}</th>
+            <th scope="col">{{user.gender}}</th>
+            <th scope="col">{{user.isAdmin}}</th>
+            <th scope="col"><button type="button" class="btn btn-success ms-2" routerLink='/admin/singleuser/{{user._id}}'>Show</button></th>
+            <th scope="col"><button type="button" class="btn btn-danger ms-2" (click)="deleteuserbyadmin(user._id)">Delete</button></th>
+            <th scope="col"><button type="button" class="btn btn-success ms-2" routerLink='/admin/singlecart/{{user._id}}'>Show Cart</button></th>
+            <th scope="col"><button type="button" class="btn btn-success ms-2" routerLink='/admin/singleorders/{{user._id}}'>Show Orders</button></th>
+          </tr>
+        </tbody>
+    </table>
+</div>

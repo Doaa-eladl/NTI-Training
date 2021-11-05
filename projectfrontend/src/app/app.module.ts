@@ -24,6 +24,10 @@ import { ShowsingleproductComponent } from './pages/admin/showsingleproduct/show
 import { ShowallcartsComponent } from './pages/admin/showallcarts/showallcarts.component';
 import { ShowallordersComponent } from './pages/admin/showallorders/showallorders.component';
 import { AddnewadminComponent } from './pages/admin/addnewadmin/addnewadmin.component';
+import { ShowallusersComponent } from './pages/admin/showallusers/showallusers.component';
+import { SinglecartComponent } from './pages/admin/singlecart/singlecart.component';
+import { SingleordersComponent } from './pages/admin/singleorders/singleorders.component';
+import { ShowsingleuserComponent } from './pages/admin/showsingleuser/showsingleuser.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +49,10 @@ import { AddnewadminComponent } from './pages/admin/addnewadmin/addnewadmin.comp
     ShowallcartsComponent,
     ShowallordersComponent,
     AddnewadminComponent,
+    ShowallusersComponent,
+    SinglecartComponent,
+    SingleordersComponent,
+    ShowsingleuserComponent,
   ],
   imports: [
     BrowserModule,

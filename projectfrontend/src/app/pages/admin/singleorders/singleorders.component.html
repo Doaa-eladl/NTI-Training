@@ -1,0 +1,27 @@
+<div>
+    <div *ngIf="noorders" class="container bg-danger pt-4 mt-4 text-center align-middle pb-4">
+      There is no user carts
+    </div>
+    <div class="table container pt-4 mt-4 pb-4"  *ngIf="!noorders">
+        <table>
+            <p>User Id {{orders.userId}}</p>
+            <p>Orders</p>
+            <table *ngFor="let order of orders.orders;let i = index">
+              <thead>
+                  <tr>order {{i+1}}</tr>
+                  <tr>total price : {{order.totalprice}}</tr>
+                  <tr>
+                      <th>product Id</th>
+                      <th>product quantity</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let product of order.productsId">
+                    <tr>
+                        <td>{{product.productId}}</td>
+                        <td style="padding-left: 50px;">{{product.quantity}}</td>
+                    </tr>
+                </tbody>
+            </table>
+      </table>
+    </div>
+</div>

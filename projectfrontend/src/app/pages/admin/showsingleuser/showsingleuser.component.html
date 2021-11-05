@@ -1,0 +1,80 @@
+<div class="container mt-4 d-flex justify-content-center">
+    <form [formGroup]="updateuser" (ngSubmit)='edituser()'>
+        <div class="row g-3 align-items-center mt-4">
+            <div class="col-auto">
+              <label class="col-form-label">User Id</label>
+            </div>
+            <div class="col-auto">
+              <input class="form-control" value="{{userData._id}}" disabled>
+            </div>
+        </div>
+        <div class="row g-3 align-items-center mt-4">
+            <div class="col-auto">
+              <label class="col-form-label">User Name</label>
+            </div>
+            <div class="col-auto">
+              <input class="form-control" value="{{userData.username}}" formControlName="username">
+            </div>
+        </div>
+        <div class="alert alert-danger my-3" *ngIf="username?.invalid && ( username?.dirty ||username?.touched)">
+            <p>invalid username</p>
+        </div>
+        <div class="row g-3 align-items-center mt-4">
+            <div class="col-auto">
+              <label class="col-form-label">User Email</label>
+            </div>
+            <div class="col-auto">
+              <input class="form-control" value="{{userData.email}}" disabled>
+            </div>
+        </div>
+        <div class="row g-3 align-items-center mt-4">
+            <div class="col-auto">
+              <label class="col-form-label">User Phone</label>
+            </div>
+            <div class="col-auto">
+              <input class="form-control" value="{{userData.phone}}" formControlName="phone">
+            </div>
+        </div>
+        <div class="alert alert-danger my-3" *ngIf="phone?.invalid && ( phone?.touched)">
+            <p *ngIf="phone?.errors?.pattern">required phone pattern</p>
+            <p *ngIf="phone?.errors?.required">required phone</p>
+        </div>
+        <div class="row g-3 align-items-center mt-4">
+            <div class="col-auto">
+              <label class="col-form-label">Gender</label>
+            </div>
+            <div class="col-auto">
+              <input class="form-control" value="{{userData.gender}}" formControlName="gender">
+            </div>
+        </div>
+        <div class="alert alert-danger my-3" *ngIf="gender?.invalid && ( gender?.touched)">
+            <p *ngIf="gender?.errors?.pattern">required gender pattern</p>
+            <p *ngIf="gender?.errors?.required">required gender</p>
+        </div>
+        <div class="row g-3 align-items-center mt-4">
+            <div class="col-auto">
+              <label class="col-form-label">User Address</label>
+            </div>
+            <div class="col-auto">
+              <input class="form-control" value="{{userData.address}}" formControlName="address">
+            </div>
+        </div>
+        <div class="alert alert-danger my-3" *ngIf="address?.invalid && ( address?.dirty ||address?.touched)">
+            <p>invalid address</p>
+        </div>
+        <div class="row mt-3">
+            <label>Is Admin</label>
+            <select class="form-control " name="isAdmin" required value="{{userData.isAdmin}}" formControlName="isAdmin">
+                <option disabled selected>isAdmin</option>
+                <option value="true">true</option>
+                <option value="false">false</option>
+            </select>
+            <div class="alert alert-danger my-3" *ngIf="isAdmin?.invalid && ( isAdmin?.dirty ||isAdmin?.touched)">
+                <p> * isAdmin is required </p>
+            </div>
+        </div>
+        <div class="d-flex align-items-end  justify-content-end">
+            <button type="submit" class="btn btn-primary row mt-4">Edit</button>
+        </div>
+    </form>
+</div>

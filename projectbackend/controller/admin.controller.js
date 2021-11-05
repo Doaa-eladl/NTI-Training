@@ -7,16 +7,22 @@ const upload = require('../middleware/fileupload');
 const Myorders = require('../db/models/myorders.model');
 
 class AdminController{
+    //show single user
+    static showsingleuser = async (req,res) =>{
+        try{
+            const user = await User.findById({_id:req.params.id})
+            if(!user) throw new Error('user not found')
+            res.status(200).send(user)
+        }
+        catch(e){
+            res.status(500).send(e.message)
+        }
+    }
     //UPDATE ANY USER
     static updateanyuser = async (req,res) =>{
-         //to be able to change pass
-         if(req.body.password){
-            req.body.password = CryptoJS.AES.encrypt(req.params.password,process.env.PassSecret).toString()
-        }
         try{
             const newuser = await User.findOneAndUpdate({_id:ObjectId(req.params.id)},{
                 $set:req.body
-                //delete req.body._id
             },{new:true})
             res.status(200).send(newuser)
         }
@@ -28,7 +34,7 @@ class AdminController{
     static deleteanyuser = async (req,res) =>{
         try{
             await User.findOneAndDelete({_id:req.params.id})
-            res.status(200).send('user deleted')
+            res.status(200).send({message:'user deleted'})
         }
         catch(e){
             res.status(500).send(e.message)
@@ -45,7 +51,7 @@ class AdminController{
             res.status(500).send(e.message)
         }
     }
-    //GET USER STATS numder of users every mounth in only this year
+    //GET USER STATS number of users every mounth in only this year
     static stats = async (req,res) =>{
         const date = new Date()
         const lastyear = new Date(date.setFullYear(date.getFullYear()-1))
@@ -142,9 +148,20 @@ class AdminController{
     //show single cart
     static showsinglecart = async (req,res) => {
         try{
-            const cart = await Cart.findOne( { userId:req.body.userId } )
-            if(!cart) throw new Error('cart not found')
+            const cart = await Cart.findOne( { userId:req.params.id } )
+            if(!cart) throw new Error("user hasn't cart yet ")
             res.status(200).send(cart)
+        }
+        catch(e){
+            res.status(200).send(e.message)
+        }
+    }
+    //show single user orders
+    static showsingleorders = async (req,res) => {
+        try{
+            const orders = await Myorders.findOne( { userId:req.params.id } )
+            if(!orders) throw new Error("user hasn't orders yet ")
+            res.status(200).send(orders)
         }
         catch(e){
             res.status(200).send(e.message)
@@ -164,22 +181,20 @@ class AdminController{
     //show profits
     static showprofits = async (req,res) => {
         try{
-            const users = await User.find()
-            if(users.length==0) throw new Error('no users found')
-            let profits=0
-            for(let i=0;i<users.length ;i++){
-                if(users[i].orders.length!=0){
-                    for(let y =0;y<users[i].orders.length;y++){
-                        if(typeof users[i].orders[y]!="number"){
-                            const product = await Product.findById({_id:users[i].orders[y].productId})
-                            for(let t=0;t<users[i].orders[y].quantity;t++){
-                                profits+=product.profit
-                            }
+            const orders = await Myorders.find()
+            if(orders.length==0) throw new Error('there is no orders')
+            let profits = 0
+            for(let i=0;i<orders.length;i++){
+                for(let y=0;y<orders[i].orders.length;y++){
+                    for(let r=0;r<orders[i].orders[y].productsId.length;r++){
+                        const product = await Product.findById( { _id:orders[i].orders[y].productsId[r].productId } )
+                        for(let u=0;u<orders[i].orders[y].productsId[r].quantity;u++){
+                            profits+=product.profit
                         }
                     }
                 }
             }
-            res.status(200).send({"profits":profits})
+            res.status(200).send({profits:profits})
         }
         catch(e){
             res.status(500).send(e.message)

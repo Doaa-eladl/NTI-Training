@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
 
@@ -12,14 +12,16 @@ import { NgForm } from '@angular/forms';
 export class ShowsingleproductComponent implements OnInit {
   productData = { title:"", desc:"", price:'', stock:'', profit:'', size:'',categorytype:'',img:'' }
   errmsg=''
+
   constructor(private _data:DataService ,
-    private route:ActivatedRoute) { }
+    private route:ActivatedRoute,
+    private router:Router)
+     { }
 
   ngOnInit(): void {
     this._data.showsingle(this.route.snapshot.paramMap.get('id')).subscribe(
       (data) => {
         this.productData=data
-        console.log(this.productData)
       },
       (err) => console.log(err),
       () => {  }
@@ -36,7 +38,7 @@ export class ShowsingleproductComponent implements OnInit {
         ()=>{
           this.errmsg=""
           addnewproduct.resetForm()
-          location.reload();
+          this.router.navigateByUrl('')
         }//final
       )
     }

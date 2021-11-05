@@ -3,16 +3,23 @@ const AdminController=require('../controller/admin.controller')
 const { verifytokenandauthorizationAndAdmin }=require('../middleware/auth.middleware')
 const upload = require("../middleware/fileupload")
 
-//SHOW ALL USERS
+//SHOW ALL USERS ******
 router.get('/showallusers', verifytokenandauthorizationAndAdmin , AdminController.showallusers)
-//show single user
+
+//show single user ****** ///postman
+router.get('/showsingleuser/:id', verifytokenandauthorizationAndAdmin ,AdminController.showsingleuser)
+
 //UPDATE ANY USER
 router.put('/updateanyuser/:id', verifytokenandauthorizationAndAdmin , AdminController.updateanyuser)
-//show single cart
-router.post("/showsinglecart" ,verifytokenandauthorizationAndAdmin ,AdminController.showsinglecart)
-//DELETE ANY USER
+//show single cart ******
+router.get("/showsinglecart/:id" ,verifytokenandauthorizationAndAdmin ,AdminController.showsinglecart)
+
+//show single user orders ****** ///postman
+router.get('/showsingleorders/:id' ,verifytokenandauthorizationAndAdmin ,AdminController.showsingleorders)
+
+//DELETE ANY USER ******
 router.delete('/deleteanyuser/:id', verifytokenandauthorizationAndAdmin , AdminController.deleteanyuser)
-//GET USER STATS
+//GET USER STATS ******
 router.get('/stats', verifytokenandauthorizationAndAdmin , AdminController.stats)
 
 //ADD PRODUCTS ******
@@ -35,7 +42,7 @@ router.delete('/deleteusercart' ,verifytokenandauthorizationAndAdmin ,AdminContr
 //show all orders ******
 router.get('/showorders' ,verifytokenandauthorizationAndAdmin ,AdminController.showorders)
 
-//show profits
+//show profits ******
 router.get('/showprofits' ,verifytokenandauthorizationAndAdmin ,AdminController.showprofits)
 
 //add new admin ******

@@ -5,7 +5,11 @@ import { AddnewproductComponent } from './pages/admin/addnewproduct/addnewproduc
 import { AdminprofileComponent } from './pages/admin/adminprofile/adminprofile.component';
 import { ShowallcartsComponent } from './pages/admin/showallcarts/showallcarts.component';
 import { ShowallordersComponent } from './pages/admin/showallorders/showallorders.component';
+import { ShowallusersComponent } from './pages/admin/showallusers/showallusers.component';
 import { ShowsingleproductComponent } from './pages/admin/showsingleproduct/showsingleproduct.component';
+import { ShowsingleuserComponent } from './pages/admin/showsingleuser/showsingleuser.component';
+import { SinglecartComponent } from './pages/admin/singlecart/singlecart.component';
+import { SingleordersComponent } from './pages/admin/singleorders/singleorders.component';
 import { AllproductsComponent } from './pages/public/allproducts/allproducts.component';
 import { NotebooksComponent } from './pages/public/notebooks/notebooks.component';
 import { SmartphonesComponent } from './pages/public/smartphones/smartphones.component';
@@ -37,6 +41,10 @@ const routes: Routes = [
     {path:"showallcarts", component:ShowallcartsComponent},
     {path:"showallorders", component:ShowallordersComponent},
     {path:"addnewadmin", component:AddnewadminComponent},
+    {path:"showallusers", component:ShowallusersComponent},
+    {path:"singlecart/:id", component:SinglecartComponent},
+    {path:"singleorders/:id", component:SingleordersComponent},
+    {path:"singleuser/:id", component:ShowsingleuserComponent},
   ]}
 ];
 

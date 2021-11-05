@@ -34,11 +34,11 @@
                   </div> 
                 </div>
                 <div>
-                  <form #pimage = "ngForm" (ngSubmit)="upimg(product._id)" *ngIf='_data.isAdmin' class="d-flex flex-column justify-content-center">
+                  <div *ngIf='_data.isAdmin' class="d-flex flex-column justify-content-center">
                     <label>Choose product image :</label>
                     <input name="img" type="file" (change)="onChangeFile($event)">
-                    <button class="mt-2">update image</button>
-                  </form>   
+                    <button class="mt-2" (click)="upimg(product._id)" type="button">update image</button>
+                  </div>   
                 <div class="d-flex  justify-content-center" *ngIf='_data.isAdmin' class='mt-2 d-flex justify-content-center'>
                   <button [disabled]="product.stock==0" class="btn btn-danger" (click)='deleteproductbyadmin(product._id)'>DELETE</button>
                 </div>  

@@ -43,19 +43,17 @@ export class AllproductsComponent implements OnInit {
     )
   }
   file:any
-  onChangeFile(event:any){ this.file = event.target.files[0]
-  }
+  onChangeFile(event:any){ this.file = event.target.files[0]}
   upimg(id:String){  
     const myData = new FormData()
-    myData.append("img",this.file,  this.file.name)
-    console.log(myData)
-    this._data.addproductimg(myData,id).subscribe(data=>{
-      console.log(data),
+    myData.append("img",this.file,this.file.name)
+    this._data.addproductimg(myData,id).subscribe(
       (err:any) => {console.log(err)},
       () => {
-        //location.reload();
+        this.ngOnInit()
       }
-      }) 
+      ) 
+      //this._data.isAdmin=true
     }
   deleteproductbyadmin(id:String){
     this._data.deleteproductbyadmin(id).subscribe(

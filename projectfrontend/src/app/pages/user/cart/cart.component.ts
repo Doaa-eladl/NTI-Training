@@ -24,11 +24,9 @@ export class CartComponent implements OnInit {
     (err) =>{ this.errormsg=err.error
     console.log(err.error)
     console.log(this.errormsg)
-    if(this._data.isAdmin==true) this._data.isAdmin=false
     },
     () =>{
       this.errormsg=''
-      if(this._data.isAdmin==true) this._data.isAdmin=false
      }
     )
   }
@@ -40,8 +38,7 @@ export class CartComponent implements OnInit {
       (err:any)=>{ 
         console.log(err.error) },
       ()=>{
-        //احتاجت دي عشان مكنش بيرفرش لوحده مش عارفه ليه
-        location.reload();
+        this.ngOnInit()
       }
     )
   }
@@ -54,7 +51,7 @@ export class CartComponent implements OnInit {
         console.log(err.error) },
       ()=>{
         //احتاجت دي عشان مكنش بيرفرش لوحده مش عارفه ليه
-        location.reload();
+        this.ngOnInit()
       }
     )
   }
@@ -66,7 +63,7 @@ export class CartComponent implements OnInit {
         console.log(err.text) },
       ()=>{
         //احتاجت دي عشان مكنش بيرفرش لوحده مش عارفه ليه
-        location.reload();
+        this.ngOnInit()
       }
       )
   }
@@ -75,7 +72,9 @@ export class CartComponent implements OnInit {
       ()=>{},
       (err:any)=>{ 
         console.log(err) },
-      () =>{ location.reload();}
+      () =>{ 
+        this.ngOnInit()
+      }
       )
   }
 }
