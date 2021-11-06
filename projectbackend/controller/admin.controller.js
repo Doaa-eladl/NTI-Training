@@ -30,9 +30,19 @@ class AdminController{
             res.status(500).send(e.message)
         }
     }
-    //DELETE ANY USER
+    //DELETE ANY USER 
     static deleteanyuser = async (req,res) =>{
         try{
+            //should found his cart also
+            const usercart = await Cart.find({userId:req.params.id})
+            //return stock first
+            for(let i=0;i<usercart[0].productsId.length;i++){
+                const product = await Product.findById( { _id:usercart[0].productsId[i].productId } )
+                product.stock+=usercart[0].productsId[i].quantity
+                await product.save()
+            }
+            //should delete his cart also
+            await Cart.deleteOne( { usercart } )
             await User.findOneAndDelete({_id:req.params.id})
             res.status(200).send({message:'user deleted'})
         }

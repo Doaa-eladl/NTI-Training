@@ -9,7 +9,7 @@ router.get('/showallusers', verifytokenandauthorizationAndAdmin , AdminControlle
 //show single user ****** ///postman
 router.get('/showsingleuser/:id', verifytokenandauthorizationAndAdmin ,AdminController.showsingleuser)
 
-//UPDATE ANY USER
+//UPDATE ANY USER ****** 
 router.put('/updateanyuser/:id', verifytokenandauthorizationAndAdmin , AdminController.updateanyuser)
 //show single cart ******
 router.get("/showsinglecart/:id" ,verifytokenandauthorizationAndAdmin ,AdminController.showsinglecart)

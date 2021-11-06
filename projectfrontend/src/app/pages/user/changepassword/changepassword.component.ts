@@ -35,8 +35,11 @@ export class ChangepasswordComponent implements OnInit {
               (data) => { console.log(data) } ,
               (e) => { console.log(e.error) },
               () => { 
+                localStorage.removeItem('token');
+                localStorage.removeItem('isAdmin');
+                localStorage.removeItem('isAuthed');
+                this._data.isAdmin=false
                 this._data.isAuthed=false
-                this._data.isAdmin =false
                }
             )
           }

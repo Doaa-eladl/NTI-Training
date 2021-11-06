@@ -26,12 +26,13 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', data.token)
           if(data.user.isAdmin==true){
             this.router.navigateByUrl('/admin')
-            this._data.isAdmin = true
+            localStorage.setItem('isAdmin', data.user.isAdmin)
+            this._data.isAdmin=true
           }
           else{
             this.router.navigateByUrl('/user/profile')
-            this._data.isAdmin = false
           }
+          localStorage.setItem('isAuthed', "true")
         },
         (err:any)=>{
           this.errormsg=err.error

@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  userData :any ={}
 
   constructor(public _data:DataService ,
     private router:Router,
@@ -24,8 +25,10 @@ export class NavbarComponent implements OnInit {
       (err) =>{ console.log(err.message)},
       () =>{
         localStorage.removeItem('token');
+        localStorage.removeItem('isAdmin');
+        localStorage.removeItem('isAuthed');
+        this._data.isAdmin=false
         this._data.isAuthed=false
-        this._data.isAdmin =false
         this.router.navigateByUrl('/')
        }
     )

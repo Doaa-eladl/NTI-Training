@@ -48,7 +48,6 @@ export class NotebooksComponent implements OnInit {
         console.log(data),
         (err:any) => {console.log(err)},
         () => {
-          //location.reload();
         }
         }) 
       }
